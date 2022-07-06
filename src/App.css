@@ -1,0 +1,33 @@
+.App {
+  text-align: center;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+.transparent {
+  opacity: 0.4;
+}
+
+.activ-nav {
+  background-color: yellow;
+  color: red;
+  font-weight: 700;
+}
+
+.container {
+  padding: 5%;
+}
+.child {
+  padding: 0.25rem;
+  border: 2px solid black;
+  width: 200px;
+  height: 100px;
+}
+
+input,
+button {
+  margin: 5px;
+  cursor: pointer;
+}

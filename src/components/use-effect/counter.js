@@ -68,12 +68,12 @@ export default function Counter() {
         <h1>Counter</h1>
       </div>
       <h2>{counter}</h2>
-      <div>
+      <span>
         <input type="button" value="+" onClick={increment} />
-      </div>
-      <div>
+      </span>
+      <span>
         <input type="button" value="-" onClick={decrement} />
-      </div>
+      </span>
     </>
   );
 }
