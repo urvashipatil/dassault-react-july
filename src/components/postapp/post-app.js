@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import PostList from "./post-list";
-import { PostContext } from "./post-context";
+import { PostContext, UserContext } from "./post-context";
 import "./post-app.css";
 import Post from "./post";
+import Counter from "../use-effect/counter";
+import PostForm from "./post-form";
 
 function PostApp() {
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState("Urvashi Sachdev");
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const onDeletePost = (post) => {
     alert(post.id);
@@ -18,6 +21,15 @@ function PostApp() {
     });
     // console.log(filteredPostList.length);
     setPostList(filteredPostList);
+  };
+
+  const onAddPost = (newPost) => {
+    // debugger;
+    console.log("from PostApp component newPost", newPost);
+    let npost = { ...newPost, id: +new Date() };
+    // newPost.id = +new Date(); //uuid V4
+
+    setPostList([npost, ...postList]);
   };
 
   useEffect(() => {
@@ -40,14 +52,18 @@ function PostApp() {
   return (
     <div>
       Post App
+      {showAddForm && <PostForm onAddPost={onAddPost} />}
+      <button onClick={() => setShowAddForm(!showAddForm)}>+</button>
       <PostContext.Provider
         value={{ onDeleteMethod: onDeletePost, userName, setUserName }}
       >
-        <PostList
-          posts={postList}
-          isLoading={isLoading}
-          // onDeletePost={onDeletePost}
-        />
+        <UserContext.Provider value={{ firstName: "John", role: "Developer" }}>
+          <PostList
+            posts={postList}
+            isLoading={isLoading}
+            // onDeletePost={onDeletePost}
+          />
+        </UserContext.Provider>
       </PostContext.Provider>
       {/* <Post post={{ id: 123, title: "dummy", body: "dummy Body" }} /> */}
     </div>

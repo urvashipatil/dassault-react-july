@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { PostContext } from "./post-context";
+import { PostContext, UserContext } from "./post-context";
+import PropTypes from "prop-types";
 
 function Post({ post }) {
   // const contextValue = useContext(PostContext);
   // console.log("contextValue", contextValue);
 
   const { onDeleteMethod, setUserName, userName } = useContext(PostContext);
+  const { firstName, role } = useContext(UserContext);
 
   const onDelete = () => {
     // alert("delete button");
@@ -15,7 +17,9 @@ function Post({ post }) {
   };
   return (
     <li key={post.id} className="post">
-      <div>{userName}</div>
+      <div>
+        {userName} - {firstName} -{role}
+      </div>
       <div className="title">{post.title}</div>
       <hr />
       <div>{post.body}</div>
@@ -25,5 +29,15 @@ function Post({ post }) {
     </li>
   );
 }
+
+//<compoentName>.propTypes={}
+Post.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    body: PropTypes.string,
+    // onDeletePost: PropTypes.func
+  }),
+};
 
 export default Post;
