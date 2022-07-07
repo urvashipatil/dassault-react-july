@@ -6,6 +6,8 @@ import PostApp from "./components/postapp/post-app";
 import CounterReducer from "./components/user-reducer/counter-reducer";
 import ChildComp from "./components/render-props/child-comp";
 import Datatable from "./components/render-props/datatable";
+import Progressbar from "./components/render-props/progress";
+import { Image, WithBorder, WithTransparent } from "./components/HOC/image";
 
 function App() {
   const [toggle, setToggle] = useState(true);
@@ -25,6 +27,10 @@ function App() {
     },
   ];
 
+  const WithBorderIMage = WithBorder(Image);
+  const WithTransparentImage = WithTransparent(Image);
+  const WithBorderTransparentImage = WithTransparent(WithBorder(Image));
+
   return (
     <div className="App">
       {/* {toggle && <Counter />}
@@ -35,40 +41,13 @@ function App() {
       {/* <ChildComp render={() => <h2>Hi All</h2>} />
       <ChildComp render={() => <h2>Render Prop</h2>} />
       <ChildComp render={() => <CounterReducer />} /> */}
-      <Datatable rows={rows} />
+      {/* <Datatable rows={rows} /> */}
+      <Image src="/logo192.png" width="100px" />
+      <WithBorderIMage src="/logo192.png" width="100px" />
+      <WithTransparentImage src="/logo192.png" width="100px" />
+      <WithBorderTransparentImage src="/logo192.png" width="100px" />
     </div>
   );
 }
 
 export default App;
-
-function Progressbar({ bgcolor = "orange", progress = 0 }) {
-  const Parentdiv = {
-    // height: height,
-    heigh: "20px",
-    width: "100%",
-    backgroundColor: "whitesmoke",
-    borderRadius: 5,
-  };
-
-  const Childdiv = {
-    height: "100%",
-    width: `${progress}%`,
-    backgroundColor: bgcolor,
-    borderRadius: 5,
-    textAlign: "right",
-  };
-
-  const progresstext = {
-    padding: 5,
-    color: "black",
-  };
-
-  return (
-    <div style={Parentdiv}>
-      <div style={Childdiv}>
-        <span style={progresstext}>{`${progress}%`}</span>
-      </div>
-    </div>
-  );
-}

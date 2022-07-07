@@ -31,3 +31,7 @@ button {
   margin: 5px;
   cursor: pointer;
 }
+
+.transparent {
+  opacity: "0.3";
+}
