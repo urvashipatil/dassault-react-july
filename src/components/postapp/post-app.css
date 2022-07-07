@@ -1,0 +1,19 @@
+.post {
+  border: 1px solid #b4adad;
+  padding: 5px;
+  margin: 6px;
+  background-color: #eee;
+}
+
+li.post {
+  list-style: none;
+}
+
+.posts {
+  text-align: left;
+}
+
+.post .title {
+  font-weight: 600;
+  color: blue;
+}
