@@ -14,11 +14,14 @@ import {
   Switch,
   Link,
   NavLink,
+  Redirect,
 } from "react-router-dom";
 import PostDetails from "./components/postapp/post-details";
+import PrivateRoute from "./components/private-route";
 
 function App() {
   const [toggle, setToggle] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const rows = [
     {
@@ -43,6 +46,11 @@ function App() {
     <div className="App">
       <Router>
         <div>
+          <span>
+            <button onClick={() => setIsLogin(!isLogin)}>
+              {isLogin ? "Logout" : "Login"}
+            </button>
+          </span>
           <span className="link">
             <NavLink activeClassName="active-nav" exact to="/">
               Home
@@ -59,13 +67,23 @@ function App() {
             </NavLink>
           </span>
         </div>
+
         <Switch>
           <Route exact path="/">
             <Image src="/logo192.png" width="100px" />
           </Route>
-          <Route path="/counter" component={Counter} />
-          <Route path="/postapp" component={PostApp} />
-          <Route path="/post/:id" component={PostDetails} />
+          {/* <Route path="/counter">
+            {isLogin ? <Counter /> : <Redirect to="/" />}
+          </Route> */}
+          <PrivateRoute path="/counter" isLogin={isLogin}>
+            <Counter />
+          </PrivateRoute>
+          <PrivateRoute path="/postapp" isLogin={isLogin}>
+            <PostApp />
+          </PrivateRoute>
+          <PrivateRoute path="/post/:id" isLogin={isLogin}>
+            <PostDetails />
+          </PrivateRoute>
 
           <Route component={InvalidPath}></Route>
         </Switch>

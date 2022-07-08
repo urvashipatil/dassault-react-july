@@ -22,7 +22,7 @@ function Post({ post }) {
       <div>
         {userName} - {firstName} -{role}
       </div>
-      <Link to={`/post/${post.id}`}>
+      <Link to={{ pathname: `/post/${post.id}`, state: `${post.title}` }}>
         <div className="title">{post.title}</div>
       </Link>
       <hr />

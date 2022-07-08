@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Prompt } from "react-router-dom";
 
 function PostForm({ onAddPost }) {
   // const [newPost, setNewPost] = useState({ title: "", body: "" });
   const [count, setCount] = useState(0);
+  const [dataChanged, setDataChanged] = useState(false);
   const formRef = useRef();
 
   const dynamicFormRef = useRef({});
@@ -48,6 +50,7 @@ function PostForm({ onAddPost }) {
       body: dynamicFormRef.current.body.value,
     };
     onAddPost(newPost);
+    setDataChanged(false);
   };
 
   // const onChangeInput = (e) => {
@@ -59,6 +62,14 @@ function PostForm({ onAddPost }) {
 
   return (
     <>
+      <Prompt
+        // when={
+        //   dynamicFormRef?.current["title"] &&
+        //   !!dynamicFormRef.current["title"].value
+        // }
+        when={dataChanged}
+        message="Are you sure you want to navigate?"
+      />
       <button onClick={() => setCount(count + 1)}>set count - {count}</button>
       <form ref={formRef} id="frmPost" name="frmPost" onSubmit={onSubmitForm}>
         <div>
@@ -69,6 +80,7 @@ function PostForm({ onAddPost }) {
             id="title"
             // value={newPost.title}
             // onChange={onChangeInput}
+            onChange={() => setDataChanged(true)}
             ref={(el) => {
               dynamicFormRef.current["title"] = el;
             }}
@@ -82,11 +94,13 @@ function PostForm({ onAddPost }) {
             id="body"
             // value={newPost.body}
             // onChange={onChangeInput}
+            onChange={() => setDataChanged(true)}
             ref={(el) => {
               dynamicFormRef.current["body"] = el;
             }}
           ></input>
         </div>
+        {/* <div>{dynamicFormRef?.current["title"]?.value}</div> */}
         <button type="submit">Save</button>
       </form>
     </>
