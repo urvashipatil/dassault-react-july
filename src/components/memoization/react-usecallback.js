@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 
 export function ReactUseCallbackApp() {
   console.log("Parent Rendering");
@@ -26,11 +26,19 @@ export function ReactUseCallbackApp() {
 
 const Child = React.memo(function Child({ counter, updateCounter }) {
   console.log("child Rendering");
+  const childNumber = useMemo(() => {
+    let childNumer = 0;
+    for (let i = 0; i < 500000000; i++) {
+      childNumer++;
+    }
+    return childNumer;
+  }, []);
   return (
     <div className="child">
       I am child -{counter}
       <div>
         <button onClick={() => updateCounter()}>Child Click</button>
+        <div>{childNumber}</div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCounter } from "../custom-hooks/use-counter";
 import { useDocumentTitle } from "../custom-hooks/use-document-title";
 import { useDyanmicTitle } from "../custom-hooks/use-dynamic-title";
-
+// console.log("Counter...");
 const Counter = () => {
   // const [counter, setCounter] = useState(0);
   // useDocumentTitle("My Counter");
