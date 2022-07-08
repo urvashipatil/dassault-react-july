@@ -19,6 +19,8 @@ import {
 import PostDetails from "./components/postapp/post-details";
 import PrivateRoute from "./components/private-route";
 import MyCounter from "./components/counter";
+import { ReactMemoApp } from "./components/memoization/react-memo-app";
+import { ReactUseCallbackApp } from "./components/memoization/react-usecallback";
 
 function App() {
   const [toggle, setToggle] = useState(true);
@@ -77,6 +79,16 @@ function App() {
               My Counter
             </NavLink>
           </span>
+          <span className="link">
+            <NavLink activeClassName="active-nav" to="/memo">
+              React.memo
+            </NavLink>
+          </span>
+          <span className="link">
+            <NavLink activeClassName="active-nav" to="/usecallback">
+              UseCallback demo
+            </NavLink>
+          </span>
         </div>
 
         <Switch>
@@ -97,6 +109,8 @@ function App() {
           </PrivateRoute>
           <Route path="reduxcounter" component={CounterReducer} />
           <Route path="/mycounter" component={MyCounter} />
+          <Route path="/memo" component={ReactMemoApp} />
+          <Route path="/usecallback" component={ReactUseCallbackApp} />
           <Route component={InvalidPath}></Route>
         </Switch>
         {/* {toggle && <Counter />}
