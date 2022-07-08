@@ -6,8 +6,9 @@ import Post from "./post";
 import Counter from "../use-effect/counter";
 import PostForm from "./post-form";
 import { useDocumentTitle } from "../custom-hooks/use-document-title";
-// console.log("PostApp...");
+console.log("PostApp outside...");
 function PostApp() {
+  console.log("PostApp...");
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState("Urvashi Sachdev");

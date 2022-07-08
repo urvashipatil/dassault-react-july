@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Counter from "./components/use-effect/counter";
 import "./App.css";
 import Posts from "./components/use-effect/posts";
-import PostApp from "./components/postapp/post-app";
+// import PostApp from "./components/postapp/post-app";
 import CounterReducer from "./components/user-reducer/counter-reducer";
 import ChildComp from "./components/render-props/child-comp";
 import Datatable from "./components/render-props/datatable";
@@ -18,9 +18,12 @@ import {
 } from "react-router-dom";
 import PostDetails from "./components/postapp/post-details";
 import PrivateRoute from "./components/private-route";
-import MyCounter from "./components/counter";
+// import MyCounter from "./components/my-counter";
 import { ReactMemoApp } from "./components/memoization/react-memo-app";
 import { ReactUseCallbackApp } from "./components/memoization/react-usecallback";
+
+const PostApp = lazy(() => import("./components/postapp/post-app"));
+const MyCounter = lazy(() => import("./components/my-counter"));
 
 function App() {
   const [toggle, setToggle] = useState(true);
@@ -102,13 +105,19 @@ function App() {
             <Counter />
           </PrivateRoute>
           <PrivateRoute path="/postapp" isLogin={isLogin}>
-            <PostApp />
+            <Suspense fallback={<h1>Loading Post App component</h1>}>
+              <PostApp />
+            </Suspense>
           </PrivateRoute>
           <PrivateRoute path="/post/:id" isLogin={isLogin}>
             <PostDetails />
           </PrivateRoute>
           <Route path="reduxcounter" component={CounterReducer} />
-          <Route path="/mycounter" component={MyCounter} />
+          <Route path="/mycounter">
+            <Suspense fallback={<h1>Loading MyCounter component</h1>}>
+              <MyCounter />
+            </Suspense>
+          </Route>
           <Route path="/memo" component={ReactMemoApp} />
           <Route path="/usecallback" component={ReactUseCallbackApp} />
           <Route component={InvalidPath}></Route>
