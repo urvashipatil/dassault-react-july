@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { PostContext, UserContext } from "./post-context";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function Post({ post }) {
   // const contextValue = useContext(PostContext);
@@ -8,6 +9,7 @@ function Post({ post }) {
 
   const { onDeleteMethod, setUserName, userName } = useContext(PostContext);
   const { firstName, role } = useContext(UserContext);
+  // const tval = "dummy";
 
   const onDelete = () => {
     // alert("delete button");
@@ -20,7 +22,9 @@ function Post({ post }) {
       <div>
         {userName} - {firstName} -{role}
       </div>
-      <div className="title">{post.title}</div>
+      <Link to={`/post/${post.id}`}>
+        <div className="title">{post.title}</div>
+      </Link>
       <hr />
       <div>{post.body}</div>
       <div>

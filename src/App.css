@@ -35,3 +35,12 @@ button {
 .transparent {
   opacity: "0.3";
 }
+
+span.link {
+  margin: 5px;
+  border: 1px solid gray;
+}
+
+.active-nav {
+  background-color: cyan;
+}
