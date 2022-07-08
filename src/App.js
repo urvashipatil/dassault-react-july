@@ -18,12 +18,13 @@ import {
 } from "react-router-dom";
 import PostDetails from "./components/postapp/post-details";
 import PrivateRoute from "./components/private-route";
-// import MyCounter from "./components/my-counter";
+import MyCounter from "./components/my-counter";
 import { ReactMemoApp } from "./components/memoization/react-memo-app";
 import { ReactUseCallbackApp } from "./components/memoization/react-usecallback";
+import ErrorBoundary from "./components/error-boundry";
 
 const PostApp = lazy(() => import("./components/postapp/post-app"));
-const MyCounter = lazy(() => import("./components/my-counter"));
+// const MyCounter = lazy(() => import("./components/my-counter"));
 
 function App() {
   const [toggle, setToggle] = useState(true);
@@ -102,7 +103,9 @@ function App() {
             {isLogin ? <Counter /> : <Redirect to="/" />}
           </Route> */}
           <PrivateRoute path="/counter" isLogin={isLogin}>
-            <Counter />
+            <ErrorBoundary>
+              <Counter />
+            </ErrorBoundary>
           </PrivateRoute>
           <PrivateRoute path="/postapp" isLogin={isLogin}>
             <Suspense fallback={<h1>Loading Post App component</h1>}>
@@ -114,9 +117,11 @@ function App() {
           </PrivateRoute>
           <Route path="reduxcounter" component={CounterReducer} />
           <Route path="/mycounter">
-            <Suspense fallback={<h1>Loading MyCounter component</h1>}>
+            {/* <Suspense fallback={<h1>Loading MyCounter component</h1>}> */}
+            <ErrorBoundary>
               <MyCounter />
-            </Suspense>
+            </ErrorBoundary>
+            {/* </Suspense> */}
           </Route>
           <Route path="/memo" component={ReactMemoApp} />
           <Route path="/usecallback" component={ReactUseCallbackApp} />
