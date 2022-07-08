@@ -6,11 +6,13 @@ import {
   Link,
   Route,
 } from "react-router-dom";
+import { useDyanmicTitle } from "../custom-hooks/use-dynamic-title";
 
 export default function PostDetails() {
   const { id } = useParams();
   const myLocation = useLocation();
   const history = useHistory();
+  const updateTitle = useDyanmicTitle("My Post");
   // console.log("myParams", myParams);
   console.log("myLocation query string", myLocation.search);
   console.log("myLocation", myLocation);
@@ -20,6 +22,14 @@ export default function PostDetails() {
     //https://jsonplaceholder.typicode.com/posts/2
     //
   }, []);
+
+  // useEffect(() => {
+  //   document.title = `Post -${id}`;
+  // }, [id]);
+
+  useEffect(() => {
+    updateTitle(id);
+  }, [id]);
 
   const onNavigate = () => {
     //....

@@ -5,12 +5,18 @@ import "./post-app.css";
 import Post from "./post";
 import Counter from "../use-effect/counter";
 import PostForm from "./post-form";
+import { useDocumentTitle } from "../custom-hooks/use-document-title";
 
 function PostApp() {
   const [postList, setPostList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState("Urvashi Sachdev");
   const [showAddForm, setShowAddForm] = useState(false);
+  useDocumentTitle("Post application");
+
+  // useEffect(() => {
+  //   document.title = "Post application";
+  // }, []);
 
   const onDeletePost = (post) => {
     alert(post.id);

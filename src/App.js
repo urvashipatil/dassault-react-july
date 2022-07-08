@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 import PostDetails from "./components/postapp/post-details";
 import PrivateRoute from "./components/private-route";
+import MyCounter from "./components/counter";
 
 function App() {
   const [toggle, setToggle] = useState(true);
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div>
+        <div style={{ textAlign: "left" }}>
           <span>
             <button onClick={() => setIsLogin(!isLogin)}>
               {isLogin ? "Logout" : "Login"}
@@ -66,6 +67,16 @@ function App() {
               Post App
             </NavLink>
           </span>
+          <span className="link">
+            <NavLink activeClassName="active-nav" to="/reduxcounter">
+              Redux Counter
+            </NavLink>
+          </span>
+          <span className="link">
+            <NavLink activeClassName="active-nav" to="/mycounter">
+              My Counter
+            </NavLink>
+          </span>
         </div>
 
         <Switch>
@@ -84,7 +95,8 @@ function App() {
           <PrivateRoute path="/post/:id" isLogin={isLogin}>
             <PostDetails />
           </PrivateRoute>
-
+          <Route path="reduxcounter" component={CounterReducer} />
+          <Route path="/mycounter" component={MyCounter} />
           <Route component={InvalidPath}></Route>
         </Switch>
         {/* {toggle && <Counter />}
