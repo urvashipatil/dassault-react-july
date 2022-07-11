@@ -26,7 +26,6 @@ import CompoundedApp from "./components/compounded-component/compounde-app";
 import ReduxCounter from "./components/redux/redux-counter";
 import { Provider } from "react-redux";
 import CounterStore from "./components/redux/store";
-
 const PostApp = lazy(() => import("./components/postapp/post-app"));
 // const MyCounter = lazy(() => import("./components/my-counter"));
 
@@ -107,6 +106,11 @@ function App() {
               Redux
             </NavLink>
           </span>
+          {/* <span className="link">
+            <NavLink activeClassName="active-nav" to="/testing">
+              Testing components
+            </NavLink>
+          </span> */}
         </div>
 
         <Switch>
