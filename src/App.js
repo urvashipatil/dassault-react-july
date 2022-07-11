@@ -26,6 +26,7 @@ import CompoundedApp from "./components/compounded-component/compounde-app";
 import ReduxCounter from "./components/redux/redux-counter";
 import { Provider } from "react-redux";
 import CounterStore from "./components/redux/store";
+import CustomInputApp from "./testing/custom-input-app";
 const PostApp = lazy(() => import("./components/postapp/post-app"));
 // const MyCounter = lazy(() => import("./components/my-counter"));
 
@@ -153,6 +154,8 @@ function App() {
           </Route>
           <Route component={InvalidPath}></Route>
         </Switch>
+        {/* <CustomInputApp /> */}
+
         {/* {toggle && <Counter />}
       <button onClick={() => setToggle(!toggle)}>Toggle Counter</button> */}
         {/* <Posts /> */}
