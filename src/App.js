@@ -23,6 +23,9 @@ import { ReactMemoApp } from "./components/memoization/react-memo-app";
 import { ReactUseCallbackApp } from "./components/memoization/react-usecallback";
 import ErrorBoundary from "./components/error-boundry";
 import CompoundedApp from "./components/compounded-component/compounde-app";
+import ReduxCounter from "./components/redux/redux-counter";
+import { Provider } from "react-redux";
+import CounterStore from "./components/redux/store";
 
 const PostApp = lazy(() => import("./components/postapp/post-app"));
 // const MyCounter = lazy(() => import("./components/my-counter"));
@@ -99,6 +102,11 @@ function App() {
               Compounded Component
             </NavLink>
           </span>
+          <span className="link">
+            <NavLink activeClassName="active-nav" to="/redux">
+              Redux
+            </NavLink>
+          </span>
         </div>
 
         <Switch>
@@ -133,6 +141,11 @@ function App() {
           <Route path="/usecallback" component={ReactUseCallbackApp} />
           <Route path="/compoundedcomp">
             <CompoundedApp />
+          </Route>
+          <Route path="/redux">
+            <Provider store={CounterStore}>
+              <ReduxCounter />
+            </Provider>
           </Route>
           <Route component={InvalidPath}></Route>
         </Switch>
